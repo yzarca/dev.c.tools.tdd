@@ -1,5 +1,0 @@
-#!/bin/bash
-#
-make -s
-bin/tddtest
-make -s clean
