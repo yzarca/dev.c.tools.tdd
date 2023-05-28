@@ -4,24 +4,6 @@
 #include <stdlib.h>
 #include "TDDunit.h"
 
-/*#define TDDunit_RunTest( test , tddunit ) \
-do {                                   \
-    char* message = test()  ;          \
-    ++tddunit->TestExecuted ;          \
-    if ( message ) {                   \
-        ++tddunit->TestFailed ;        \
-    }                                  \
-} while ( 0 )
-*/
-/*typedef struct _tddunit
-{   //
-    int    CurAssert    ;
-    int    NumAsserts   ;
-    int    TestExecuted ;
-    int    TestFailed   ;
-    FN_ASSERT Asserts[] ;
-}   TDDunit ;
-*/
 TDDunit* TDDunit_New( size_t NumFNs )
 {   //
     TDDunit* tdd = ( TDDunit* )malloc( sizeof( TDDunit ) + sizeof( FN_ASSERT ) * NumFNs ) ;

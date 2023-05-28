@@ -14,7 +14,6 @@ do {                                                                  \
 } while ( 0 )
 
 typedef char* ( *FN_ASSERT )()  ;
-//typedef struct _tddunit TDDunit ;
 typedef struct _tddunit
 {   //
     int    CurAssert    ;
