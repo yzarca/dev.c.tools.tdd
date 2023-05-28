@@ -1,10 +1,21 @@
-// File: TDDunit.c
+// File: tddunit.h
+
+#ifndef TDDUNIT_H
+#define TDDUNIT_H
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "TDDunit.h"
 
-/*#define TDDunit_RunTest( test , tddunit ) \
+#define TDDU_Assert( message , test )                                 \
+do {                                                                  \
+    if ( !( test ) ) {                                                \
+        printf( "Failure :\n" ) ;                                     \
+        printf( "    - %s() [ Line : %d ]\n", __func__ , __LINE__ ) ; \
+        printf( "    - Message : %s\n" , message ) ;                  \
+        return message ;                                              \
+    }                                                                 \
+} while ( 0 )
+#define TDDU_RunTest( test , tddunit ) \
 do {                                   \
     char* message = test()  ;          \
     ++tddunit->TestExecuted ;          \
@@ -12,19 +23,20 @@ do {                                   \
         ++tddunit->TestFailed ;        \
     }                                  \
 } while ( 0 )
-*/
-/*typedef struct _tddunit
+
+typedef char* ( *FN_ASSERT )() ;
+typedef struct _tddunit
 {   //
     int    CurAssert    ;
     int    NumAsserts   ;
     int    TestExecuted ;
     int    TestFailed   ;
     FN_ASSERT Asserts[] ;
-}   TDDunit ;
-*/
-TDDunit* TDDunit_New( size_t NumFNs )
+}   TDDUnit ;
+
+static TDDUnit* TDDUnit_New( size_t NumFNs )
 {   //
-    TDDunit* tdd = ( TDDunit* )malloc( sizeof( TDDunit ) + sizeof( FN_ASSERT ) * NumFNs ) ;
+    TDDUnit* tdd = ( TDDUnit* )malloc( sizeof( TDDUnit ) + sizeof( FN_ASSERT ) * NumFNs ) ;
     //
     if ( tdd == NULL ) {}
     //
@@ -36,38 +48,23 @@ TDDunit* TDDunit_New( size_t NumFNs )
     return tdd ;
 }   //
 
-void TDDunit_AddAssert( TDDunit* Tunit , FN_ASSERT Fn )
+static void TDDUnit_AddAssert( TDDUnit* Tunit , FN_ASSERT Fn )
 {   //
-    if ( Tunit->CurAssert < Tunit->NumAsserts )
-    {   //
+    if ( Tunit->CurAssert < Tunit->NumAsserts ) {
         Tunit->Asserts[ Tunit->CurAssert++ ] = Fn ;
-    }   //
-    else 
-    {   //
+    } else {
         printf( "Reached the maximum number of assertions: %d\n" , Tunit->NumAsserts ) ;
     }   //
 }   //
 
-void TDDunit_RunAssertion( FN_ASSERT Assertion , TDDunit* Tunit ) \
+static void TDDUnit_RunAssertions( TDDUnit* Tunit )
 {   //
-    char* message = Assertion() ;
-    ++Tunit->TestExecuted ;
-    if ( message )
-    {   //
-        ++Tunit->TestFailed ;
+    for ( int i = 0 ; i < Tunit->NumAsserts ; ++i ) {
+        TDDU_RunTest( Tunit->Asserts[ i ] , Tunit ) ;
     }   //
 }   //
 
-void TDDunit_RunAssertions( TDDunit* Tunit )
-{   //
-    for ( int i = 0 ; i < Tunit->NumAsserts ; ++i ) 
-    {   //
-        //TDDunit_RunTest( Tunit->Asserts[ i ] , Tunit ) ;
-        TDDunit_RunAssertion( Tunit->Asserts[ i ] , Tunit ) ;
-    }   //
-}   //
-
-void TDDunit_ShowResult( TDDunit* Tunit )
+static void TDDUnit_ShowResult( TDDUnit* Tunit )
 {   //
     printf( "###\n" ) ;
     printf( "Tests Passed   : %d\n" , Tunit->TestExecuted - Tunit->TestFailed  ) ;
@@ -82,3 +79,4 @@ void TDDunit_ShowResult( TDDunit* Tunit )
     }   //
 }   //
 
+#endif

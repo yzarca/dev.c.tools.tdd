@@ -1,22 +1,23 @@
 # makefile_test
 #
 CC    = gcc	#compiler
-OBJS  = tddtest.o tddunit.o
+OBJS  = TDDtest.o TDDunit.o
 #
 BINPATH = bin
 LIBPATH = lib
 OBJPATH = obj
+SRCPATH = src
 
-tddtest:	$(OBJS)
+TDDtest:	$(OBJS)
 	[ -d $(BINPATH) ] || /usr/bin/mkdir $(BINPATH)
-	$(CC) $(OBJPATH)/tddtest.o $(OBJPATH)/tddunit.o -o $(BINPATH)/tddtest
+	$(CC) $(OBJPATH)/TDDtest.o $(OBJPATH)/TDDunit.o -o $(BINPATH)/TDDtest
 
-tddtest.o:
+TDDtest.o:
 	[ -d $(OBJPATH) ] || /usr/bin/mkdir $(OBJPATH)
-	$(CC) -c tddtest.c -o $(OBJPATH)/tddtest.o
-tddunit.o:
+	$(CC) -c $(SRCPATH)/TDDtest.c -o $(OBJPATH)/TDDtest.o
+TDDunit.o:
 	[ -d $(OBJPATH) ] || /usr/bin/mkdir $(OBJPATH)
-	$(CC) -c $(LIBPATH)/tddunit.c -o $(OBJPATH)/tddunit.o
+	$(CC) -c $(LIBPATH)/TDDunit.c -o $(OBJPATH)/TDDunit.o
 
 clean:
 	rm -f $(OBJPATH)/*.o
