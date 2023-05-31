@@ -42,5 +42,24 @@ int main(int argc, char **argv)
 ## Execute Test  
 
 ``` sh
-./RunTEST
+./Run.TesT
+```
+
+---
+
+## Tree  
+
+```
+.
+├── Makefile
+├── README.md
+├── Run.TesT
+├── bin
+│   └── Run.TesT.a
+├── lib
+│   ├── TDDunit.c
+│   └── TDDunit.h
+├── obj
+└── src
+    └── TesT.c
 ```

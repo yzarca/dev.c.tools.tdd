@@ -1,20 +1,20 @@
 # makefile_test
 #
-CC    = gcc	#compiler
-OBJS  = TEST.TDDunit.o TDDunit.o
+CC    = gcc
+OBJS  = TesT.o TDDunit.o
 #
 BINPATH = bin
 LIBPATH = lib
 OBJPATH = obj
 SRCPATH = src
 
-TEST.TDDunit:	$(OBJS)
+TesT:	$(OBJS)
 	[ -d $(BINPATH) ] || /usr/bin/mkdir $(BINPATH)
-	$(CC) $(OBJPATH)/TEST.TDDunit.o $(OBJPATH)/TDDunit.o -o $(BINPATH)/TEST.TDDunit
+	$(CC) $(OBJPATH)/TesT.o $(OBJPATH)/TDDunit.o -o $(BINPATH)/Run.TesT.a
 
-TEST.TDDunit.o:
+TesT.o:
 	[ -d $(OBJPATH) ] || /usr/bin/mkdir $(OBJPATH)
-	$(CC) -c $(SRCPATH)/TEST.TDDunit.c -o $(OBJPATH)/TEST.TDDunit.o
+	$(CC) -c $(SRCPATH)/TesT.c -o $(OBJPATH)/TesT.o
 TDDunit.o:
 	[ -d $(OBJPATH) ] || /usr/bin/mkdir $(OBJPATH)
 	$(CC) -c $(LIBPATH)/TDDunit.c -o $(OBJPATH)/TDDunit.o

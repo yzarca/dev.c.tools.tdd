@@ -1,5 +1,5 @@
 #!/bin/bash
 #
 make -s
-bin/TEST.TDDunit
+bin/Run.TesT.a
 make -s clean
