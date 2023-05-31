@@ -1,7 +1,7 @@
 ---
-title: "Library: TDDunit"
-author: "yzarca"
-date: "2023.05.31"
+Title: "Library: TDDunit"
+Author: "yzarca"
+Date: "2023.05.31"
 ---
 # dev.c.tools.tdd
 
